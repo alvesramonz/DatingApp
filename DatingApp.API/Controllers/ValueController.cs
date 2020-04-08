@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DatingApp.API.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace DatingApp.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
@@ -23,18 +25,18 @@ namespace DatingApp.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetValues()
         {
-            //Transformar as variáveis de valores DO BANCO DE DADOS numa lista
+            //Transformar as variï¿½veis de valores DO BANCO DE DADOS numa lista
             var values = await _context.Values.ToListAsync();
 
             //Retornando a lista de valores do banco de dados
             return Ok(values);
         }
 
-        // GET api/values/5
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetValue(int id)
         {
-            //Caso o número digitado não seja um id presente, simplesmente irá devolver
+            //Caso o nï¿½mero digitado nï¿½o seja um id presente, simplesmente irï¿½ devolver
             //o default, ou seja, "NO" como resposta ao return
             var value = await _context.Values.FirstOrDefaultAsync(x => x.Id == id);
 
