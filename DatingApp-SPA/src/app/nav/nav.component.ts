@@ -20,7 +20,7 @@ export class NavComponent implements OnInit {
         console.log('Logged in sucessfully');
       },
       (error) => {
-        console.log('Failed to login');
+        console.log(error);
       }
     );
   }
@@ -32,6 +32,6 @@ export class NavComponent implements OnInit {
 
   logout() {
     localStorage.removeItem('token');
-    console.log('logget out');
+    console.log('Logget out');
   }
 }

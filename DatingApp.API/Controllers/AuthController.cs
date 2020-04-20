@@ -41,7 +41,7 @@ namespace DatingApp.API.Controllers
 
             var createdUser = await _repo.Register(userToCreate, userForRegisterDto.Password);
 
-            return StatusCode(201);
+        return StatusCode(201);
         }
 
         [HttpPost("login")]
@@ -50,7 +50,7 @@ namespace DatingApp.API.Controllers
         {
             var userFromRepo = await _repo.Login(userForLoginDto.Username.ToLower(), userForLoginDto.Password);
 
-            if(userForLoginDto == null)
+            if(userFromRepo == null)
                 return Unauthorized();
             
             var claims = new[]
